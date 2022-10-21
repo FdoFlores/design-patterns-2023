@@ -7,6 +7,8 @@ public class StateClient : IConsumer
     public const string ATTACK = "Attack";
     public const string SLEEP = "Sleep";
     public const string SWIM = "Swim";
+    public const string EAT = "Eat";
+    public const string JUMP = "Jump";
 
     private string state = WALK;
 
@@ -47,7 +49,7 @@ public class StateClient : IConsumer
                 }
                 break;
             case SLEEP:
-                if (state == ATTACK )
+                if (state == ATTACK || state == JUMP)
                 {
                     Console.WriteLine($"No puedes cambiar estado de {state} a {action}");
                 }
@@ -58,7 +60,29 @@ public class StateClient : IConsumer
                 }
                 break;
             case SWIM:
-                if (state == SLEEP || state == ATTACK)
+                if (state == SLEEP || state == ATTACK || state == JUMP || state == EAT)
+                {
+                    Console.WriteLine($"No puedes cambiar estado de {state} a {action}");
+                }
+                else
+                {
+                    Console.WriteLine($"Cambio de estado de {state} -> {action}");
+                    state = action;
+                }
+                break;
+            case EAT:
+                if (state == SLEEP || state == ATTACK || state == JUMP)
+                {
+                    Console.WriteLine($"No puedes cambiar estado de {state} a {action}");
+                }
+                else
+                {
+                    Console.WriteLine($"Cambio de estado de {state} -> {action}");
+                    state = action;
+                }
+                break;
+            case JUMP:
+                if (state == SLEEP || state == EAT)
                 {
                     Console.WriteLine($"No puedes cambiar estado de {state} a {action}");
                 }
